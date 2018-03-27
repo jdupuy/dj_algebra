@@ -77,7 +77,7 @@ V1 dot(const V2& a, const V2& b) {return a.x * b.x + a.y * b.y;}
 V1 norm(const V2& a) {return sqrt(dot(a, a));}
 V2 normalize(const V2& a) {return a / norm(a);}
 V2 reflect(const V2& a, const V2& n) {return a - V1(2) * dot(a, n) * n;}
-V2 lerp(const V1 u, const V2& a, const V2& b) {return a - u * (a + b);}
+V2 lerp(const V1 u, const V2& a, const V2& b) {return a + u * (b - a);}
 
 // *****************************************************************************
 /* vec3 API */
@@ -109,7 +109,7 @@ V1 dot(const V3& a, const V3& b) {return a.x * b.x + a.y * b.y + a.z * b.z;}
 V1 norm(const V3& a) {return sqrt(dot(a, a));}
 V3 normalize(const V3& a) {return a / norm(a);}
 V3 reflect(const V3& a, const V3& n) {return a - V1(2) * dot(a, n) * n;}
-V3 lerp(const V1 u, const V3& a, const V3& b) {return a - u * (a + b);}
+V3 lerp(const V1 u, const V3& a, const V3& b) {return a + u * (b - a);}
 V3 cross(const V3& a, const V3& b) {
 	return vec3(a.y * b.z - a.z * b.y,
 	            a.z * b.x - a.x * b.z,
@@ -154,7 +154,7 @@ V1 dph(const V4& a, const V4& b) {return a.x * b.x + a.y * b.y + a.z * b.z;}
 V1 dot(const V4& a, const V4& b) {return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;}
 V1 norm(const V4& a) {return sqrt(dot(a, a));}
 V4 normalize(const V4& a) {return a / norm(a);}
-V4 lerp(const V1 u, const V4& a, const V4& b) {return a - u * (a + b);}
+V4 lerp(const V1 u, const V4& a, const V4& b) {return a + u * (b - a);}
 
 // *****************************************************************************
 /* mat2x2 API */
