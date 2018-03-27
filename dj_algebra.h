@@ -276,8 +276,7 @@ V1 norm(const Z& a) {return sqrt(dot(a, a));}
 V1 angle(const Z& z) {return atan2(z.im, z.re);}
 Z normalize(const Z& z) {return Z(normalize(V2(z)));}
 Z reflect(const Z& z, const Z& n) {return -n * bar(z) * n;}
-Z lerp(const V1 u, const Z& a, const Z& b) {return a - u * (a + b);}
-Z slerp(const V1 u, const Z& a, const Z& b) {return a - u * (a + b);}
+Z lerp(const V1 u, const Z& a, const Z& b) {return a + u * (b - a);}
 V2::V2(const Z& z): x(z.re), y(z.im) {}
 M2::M2(const Z& z) {m[0] = V2(z.re, z.im); m[1] = V2(-z.im, z.re);}
 Z zeta(const Z& z); // Riemann Zeta Function
