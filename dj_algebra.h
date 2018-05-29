@@ -224,7 +224,7 @@ struct mat4 {
 		static mat4 perspective(V1 fovy, V1 aspect, V1 zNear, V1 zFar);
 		static mat4 orthographic(V1 left, V1 right,
 		                         V1 bottom, V1 top,
-		                         V1 near, V1 far);
+		                         V1 zNear, V1 zFar);
 		static mat4 tile(V1 left, V1 right, V1 bottom, V1 top);
 	};
 	V4& operator[](int i) {return m[i];}
@@ -842,18 +842,18 @@ mat4
 mat4::homogeneous::orthographic(
 	float_t left, float_t right,
 	float_t bottom, float_t top,
-	float_t near, float_t far
+	float_t zNear, float_t zFar
 ) {
 	DJA_ASSERT(left != right && bottom != top && near != far);
 	float_t c1 = float_t(1) / (right - left);
 	float_t c2 = float_t(1) / (top - bottom);
-	float_t c3 = float_t(1) / (far - near);
+	float_t c3 = float_t(1) / (zFar - zNear);
 	float_t d1 = float_t(2) * c1;
 	float_t d2 = float_t(2) * c2;
 	float_t d3 = -float_t(2) * c3;
 	float_t tx = -(right + left) * c1;
 	float_t ty = -(top + bottom) * c2;
-	float_t tz = -(far + near) * c3;
+	float_t tz = -(zFar + zNear) * c3;
 
 #if 0 // Standard OpenGL
 	return mat4(d1, 0 , 0 , tx,
