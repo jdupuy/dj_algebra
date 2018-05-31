@@ -192,6 +192,7 @@ struct mat3 {
 	static mat3 rotation(const Q& quaternion);
 	static mat3 scale(V1 value);
 	static mat3 scale(const V3& values);
+	static mat3 lookat(const V3& target, const V3& origin, const V3& up);
 	V3& operator[](int i) {return m[i];}
 	const V3& operator[](int i) const {return m[i];}
 	private: V3 m[3];
@@ -808,6 +809,18 @@ mat4 mat4::homogeneous::translation(const vec3& dir)
 	            0, 0, 1, dir.z,
 	            0, 0, 0, 1     );
 }
+
+/* LookAt */
+mat3
+mat3::lookat(const vec3 &target, const vec3 &origin, const vec3 &up)
+{
+	vec3 x = normalize(target - origin);
+	vec3 y = cross(up, x);
+	vec3 z = cross(x, y);
+
+	return mat3(x, y, z);
+}
+
 
 /* Projections */
 mat4
