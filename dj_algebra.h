@@ -818,7 +818,7 @@ mat3::lookat(const vec3 &target, const vec3 &origin, const vec3 &up)
 	vec3 y = cross(up, x);
 	vec3 z = cross(x, y);
 
-	return mat3(x, y, z);
+	return transpose(mat3(x, y, z));
 }
 
 
